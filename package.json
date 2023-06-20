@@ -1,0 +1,33 @@
+{
+  "name": "auth-den",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "tsc && cp -r ./src/templates ./build/templates",
+    "dev": "tsc-watch --onSuccess \"node ./build/index.js\"",
+    "start": "node build/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/express-rate-limit": "^6.0.0",
+    "@types/mongodb": "^4.0.7",
+    "nodemon": "^2.0.15",
+    "tsc-watch": "^6.0.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^6.0.1",
+    "mongodb": "^4.2.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.8.2"
+  }
+}
