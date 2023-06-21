@@ -5,10 +5,9 @@ import config from '../../config';
 exports.handleGetUser = async () => {
   return {
     status: 200,
-    name: 'Michael Scott',
+    name: 'Michael Scotdt',
   };
 };
-
 passport.use(
   new GoogleStrategy(
     {
@@ -17,20 +16,15 @@ passport.use(
       callbackURL: 'http://localhost:8000/api/auth/google/callback',
       passReqToCallback: true,
     },
-    async (_accessToken, _refreshToken, profile, cb: any) => {
+    async (accessToken, refreshToken, _, profile, cb) => {
       try {
-        console.log(profile);
+        console.log('profile', profile);
+
         return cb(null, profile);
       } catch (e: any) {
-        throw new Error(e);
+        console.log('Error in passport.use', e.message);
+        return cb(e, null);
       }
     }
   )
 );
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});

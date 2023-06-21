@@ -1,4 +1,5 @@
-import Head from "next/head";
+import Head from 'next/head';
+import Home from '../components';
 
 const IndexPage = () => (
   <div className="grid place-content-center">
@@ -6,7 +7,7 @@ const IndexPage = () => (
       <title>NextJs</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <h1>Next.js with Typescript and Tailwind 👋</h1>
+    <Home />
   </div>
 );
 

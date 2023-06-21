@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-const { handleGetUser, handleRegisterUser } = require('./user-service');
+const { handleGetUser, handleRegisterUser } = require('./auth-service');
 
 export const getUser = async (req: Request, res: Response) => {
   const data = await handleGetUser();
