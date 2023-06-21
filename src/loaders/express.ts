@@ -1,6 +1,8 @@
-import rateLimit from 'express-rate-limit';
-import cors from 'cors';
 import express from 'express';
+import passport from 'passport';
+import rateLimit from 'express-rate-limit';
+import session from 'express-session';
+import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import routes from '../api';
@@ -20,6 +22,16 @@ export default ({ app }: { app: express.Application }): void => {
     }
   });
 
+  app.use(
+    session({
+      secret: 'cookie_secret',
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: true },
+    })
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(morgan('dev'));
   app.use(helmet());
   app.use(cors());
