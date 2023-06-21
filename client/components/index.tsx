@@ -6,6 +6,7 @@ const Home = () => {
   return (
     <>
       <Button title={'Google'} link={API.auth.google} />
+      <Button title={'Github'} link={API.auth.github} />
     </>
   );
 };

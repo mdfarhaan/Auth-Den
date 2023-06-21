@@ -3,5 +3,6 @@ export const API = {
   prefix: '/api',
   auth: {
     google: '/auth/google',
+    github: '/auth/github',
   },
 };

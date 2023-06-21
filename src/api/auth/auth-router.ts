@@ -1,11 +1,10 @@
-import { getUser, registerUser } from './auth-controller';
+import { getUser } from './auth-controller';
 import express from 'express';
 import passport from 'passport';
 
 const app = express.Router();
 
 app.get('/', getUser);
-app.post('/register', registerUser);
 
 app.get(
   '/google',
@@ -16,10 +15,19 @@ app.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function (req, res) {
-    // Successful authentication, redirect home.
-    console.log('RAYMOND');
     console.log(req.user);
     res.redirect('/healthcheck');
+  }
+);
+
+app.get('/github', passport.authenticate('github', { scope: [] }));
+
+app.get(
+  '/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    console.log(req.user);
+    res.redirect('/healthcheck?source=github');
   }
 );
 
