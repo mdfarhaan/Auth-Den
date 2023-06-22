@@ -5,13 +5,6 @@ import config from '../../config';
 import { handleCreateUser } from '../users/users-service';
 import { googleFormatter, githubFormatter } from '../../shared/helper';
 
-exports.handleGetUser = async () => {
-  return {
-    status: 200,
-    name: 'Michael Scott',
-  };
-};
-
 passport.use(
   new GoogleStrategy(
     {

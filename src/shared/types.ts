@@ -3,5 +3,8 @@ export interface userType {
   email: string;
   provider: string;
   avatar: string;
+  following: number;
+  followers: number;
+  posts: number;
   createdAt: Date;
 }
