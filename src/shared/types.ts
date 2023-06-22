@@ -6,5 +6,6 @@ export interface userType {
   following: number;
   followers: number;
   posts: number;
+  location: string;
   createdAt: Date;
 }
