@@ -2,6 +2,8 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 import { Strategy as GithubStrategy } from 'passport-github';
 import config from '../../config';
+import { handleCreateUser } from '../users/users-service';
+import { googleFormatter, githubFormatter } from '../../shared/helper';
 
 exports.handleGetUser = async () => {
   return {
@@ -20,7 +22,8 @@ passport.use(
     },
     async (accessToken, refreshToken, _, profile, cb) => {
       try {
-        console.log('profile', profile);
+        profile = googleFormatter(profile);
+        await handleCreateUser(profile);
         return cb(null, profile);
       } catch (e: any) {
         console.log('Error in passport.use', e.message);
@@ -40,7 +43,7 @@ passport.use(
     },
     async (accessToken, refreshToken, _, profile, cb) => {
       try {
-        console.log('profile', profile);
+        profile = githubFormatter(profile);
         return cb(null, profile);
       } catch (e: any) {
         console.log('Error in passport.use', e.message);
