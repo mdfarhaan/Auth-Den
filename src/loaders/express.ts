@@ -38,22 +38,10 @@ export default ({ app }: { app: express.Application }): void => {
   passport.deserializeUser((user, done) => {
     done(null, user);
   });
-  app.use(
-    cors({
-      origin: 'http://localhost:3000',
-      methods: 'GET,POST,PUT,DELETE',
-      credentials: true,
-    })
-  );
 
   app.use(morgan('dev'));
   app.use(helmet());
-  app.use(
-    cors({
-      origin: 'http://localhost:3000',
-      credentials: true,
-    })
-  );
+  app.use(cors());
   app.use(express.json());
   app.use(
     rateLimit({
@@ -67,5 +55,13 @@ export default ({ app }: { app: express.Application }): void => {
       },
     })
   );
+
   app.use(config.api.prefix, routes());
+
+  app.use('/', (req, res) => {
+    res.status(200).json({
+      success: true,
+      message: 'Welcome to the Auth Den API!',
+    });
+  });
 };

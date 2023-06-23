@@ -1,6 +1,15 @@
-FROM node:14
+FROM node:16-alpine
+
 WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
 COPY . .
-RUN npm i
+
+RUN npm run build
+
 EXPOSE 8000
-CMD ["npm" , "start"]
+
+CMD ["node", "build/index.js"]

@@ -4,9 +4,21 @@ import { userType } from '../../shared/types';
 import { generateRandomInfo, calculateStats } from '../../shared/helper';
 
 export const handleGetUser = async () => {
-  const db = await database();
-  const users = await db.collection('users').find({}).toArray();
-  return users;
+  try {
+    const db = await database();
+    const users = await db.collection('users').find({}).toArray();
+    return {
+      sucess: true,
+      code: 200,
+      data: users,
+    };
+  } catch (error) {
+    Logger.log({
+      level: 'error',
+      message: `Error while getting users - ${error.message}`,
+    });
+    return { sucess: false, code: 500, message: error.message };
+  }
 };
 
 export const handleGetStats = async () => {
@@ -35,7 +47,7 @@ export const handleGetStats = async () => {
   } catch (error) {
     Logger.log({
       level: 'error',
-      message: `Error while getting users - ${error.message}`,
+      message: `Error while getting stats - ${error.message}`,
     });
     return { sucess: false, code: 500, message: error.message };
   }
