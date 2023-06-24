@@ -16,6 +16,10 @@ export default {
       clientID: process.env.GITHUB_OAUTH_CLIENT_ID,
       clientSecret: process.env.GITHUB_OAUTH_CLIENT_SECRET,
     },
+    twitter: {
+      consumerKey: process.env.TWITTER_CONSUMER_KEY,
+      consumerSecret: process.env.TWITTER_SECRET_KEY,
+    },
   },
   CLIENT_URL: process.env.CLIENT_URL,
 };

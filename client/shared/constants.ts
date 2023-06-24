@@ -4,5 +4,6 @@ export const API = {
   auth: {
     google: '/auth/google',
     github: '/auth/github',
+    twitter: '/auth/twitter',
   },
 };

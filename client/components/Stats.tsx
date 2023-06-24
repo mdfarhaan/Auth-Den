@@ -23,7 +23,7 @@ const Stats = ({ data, loading }) => {
               {data.averagePosts.toFixed()}
             </span>
           </p>
-          <h2 className="text-xl text-center font-medium mt-3">Providers</h2>
+          <h2 className="text-xl text-center font-medium mt-3 ">Providers</h2>
           {Object.keys(data.providers).map((item) => (
             <div key={item}>
               <p className="text-xl">
