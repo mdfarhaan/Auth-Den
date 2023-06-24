@@ -29,7 +29,6 @@ export const getUsers = async () => {
   } catch (err) {
     return {
       success: false,
-      data: err.response.data,
     };
   }
 };

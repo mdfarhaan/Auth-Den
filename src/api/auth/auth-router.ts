@@ -1,6 +1,7 @@
-import { getUser } from './auth-controller';
 import express from 'express';
 import passport from 'passport';
+import { getUser } from './auth-controller';
+import config from '../../config';
 
 const app = express.Router();
 
@@ -15,8 +16,7 @@ app.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function (req, res) {
-    console.log(req.user);
-    res.redirect('/healthcheck');
+    res.redirect(`${config.CLIENT_URL}?source=google`);
   }
 );
 
@@ -26,8 +26,7 @@ app.get(
   '/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    console.log(req.user);
-    res.redirect('/healthcheck?source=github');
+    res.redirect(`${config.CLIENT_URL}?source=github`);
   }
 );
 

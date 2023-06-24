@@ -17,4 +17,5 @@ export default {
       clientSecret: process.env.GITHUB_OAUTH_CLIENT_SECRET,
     },
   },
+  CLIENT_URL: process.env.CLIENT_URL,
 };

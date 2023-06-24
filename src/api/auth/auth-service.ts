@@ -37,6 +37,7 @@ passport.use(
     async (accessToken, refreshToken, _, profile, cb) => {
       try {
         profile = githubFormatter(profile);
+        await handleCreateUser(profile);
         return cb(null, profile);
       } catch (e: any) {
         console.log('Error in passport.use', e.message);

@@ -43,16 +43,12 @@ export const calculateStats = (data) => {
     allFollowers.push(user.followers);
     allFollowing.push(user.following);
     allPosts.push(user.posts);
-    if (providers[user.provider]) {
-      providers[user.provider] += 1;
-    } else {
-      providers[user.provider] = 1;
-    }
-    if (location[user.location]) {
-      location[user.location] += 1;
-    } else {
-      location[user.location] = 1;
-    }
+
+    if (providers[user.provider]) providers[user.provider] += 1;
+    else providers[user.provider] = 1;
+
+    if (location[user.location]) location[user.location] += 1;
+    else location[user.location] = 1;
   });
   const averageFollowing = allFollowing.reduce((a, b) => a + b, 0) / len;
   const averageFollowers = allFollowers.reduce((a, b) => a + b, 0) / len;

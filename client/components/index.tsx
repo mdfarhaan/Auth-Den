@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Auth from './Auth';
 import Users from './Users';
 import Stats from './Stats';
@@ -9,6 +10,9 @@ const Home = () => {
   const [userData, setUserData] = useState([]);
   const [statsData, setStatsData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const { source } = router.query;
 
   const tabItems = ['Auth', 'Users', 'Stats'];
 
@@ -57,6 +61,16 @@ const Home = () => {
         ))}
       </div>
       <div className="grid place-content-center mt-5">{renderTab()}</div>
+      {source && (
+        <div className="absolute m-5 top-0 left-0">
+          <p className="text-lg">
+            Logged in with{' '}
+            <span className="text-xl font-bold uppercase text-blue-500">
+              {source}
+            </span>
+          </p>
+        </div>
+      )}
     </>
   );
 };
