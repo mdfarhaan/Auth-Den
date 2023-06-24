@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiGithub, FiTwitter } from 'react-icons/fi';
-import { FaGoogle } from 'react-icons/fa';
+import { FaGoogle, FaDiscord } from 'react-icons/fa';
 import { BsMicrosoft } from 'react-icons/bs';
 import { API } from '../shared/constants';
 
@@ -48,6 +48,16 @@ const Button = ({ title, link }) => {
           >
             Login with {title}
             <FiTwitter size={22} className="ml-2" />
+          </a>
+        );
+      case 'Discord':
+        return (
+          <a
+            href={`${API.API_URL}${API.prefix}${link}`}
+            className={`${style} bg-slate-50`}
+          >
+            Login with {title}
+            <FaDiscord size={22} className="ml-2" />
           </a>
         );
     }

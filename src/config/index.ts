@@ -24,6 +24,10 @@ export default {
       clientID: process.env.MICROSOFT_OAUTH_CLIENT_ID,
       clientSecret: process.env.MICROSOFT_OAUTH_CLIENT_SECRET,
     },
+    discord: {
+      clientID: process.env.DISCORD_OAUTH_CLIENT_ID,
+      clientSecret: process.env.DISCORD_OAUTH_CLIENT_SECRET,
+    },
   },
   CLIENT_URL: process.env.CLIENT_URL,
 };

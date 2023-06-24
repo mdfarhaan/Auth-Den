@@ -50,4 +50,14 @@ app.get(
   }
 );
 
+app.get('/discord', passport.authenticate('discord'));
+
+app.get(
+  '/discord/callback',
+  passport.authenticate('discord', { failureRedirect: config.CLIENT_URL }),
+  function (req, res) {
+    res.redirect(`${config.CLIENT_URL}?source=discord`);
+  }
+);
+
 export default app;

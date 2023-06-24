@@ -27,6 +27,15 @@ export const microsoftFormatter = (profile) => {
   };
 };
 
+export const discordFormatter = (profile) => {
+  return {
+    provider: profile.provider,
+    name: profile.global_name,
+    email: profile.email,
+    picture: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`,
+  };
+};
+
 export const generateRandomInfo = () => {
   const following = Math.floor(Math.random() * 500);
   const followers = Math.floor(Math.random() * 500);
