@@ -5,5 +5,6 @@ export const API = {
     google: '/auth/google',
     github: '/auth/github',
     twitter: '/auth/twitter',
+    microsoft: '/auth/microsoft',
   },
 };

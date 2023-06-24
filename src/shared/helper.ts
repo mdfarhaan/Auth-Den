@@ -18,6 +18,15 @@ export const githubFormatter = (profile) => {
   };
 };
 
+export const microsoftFormatter = (profile) => {
+  return {
+    provider: profile.provider,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    picture: '',
+  };
+};
+
 export const generateRandomInfo = () => {
   const following = Math.floor(Math.random() * 500);
   const followers = Math.floor(Math.random() * 500);
@@ -33,7 +42,6 @@ export const generateRandomInfo = () => {
 
 export const calculateStats = (data) => {
   const len = data.length;
-
   let allFollowing = [];
   let allFollowers = [];
   let allPosts = [];
@@ -58,5 +66,6 @@ export const calculateStats = (data) => {
     averageFollowers,
     averagePosts,
     providers,
+    location,
   };
 };

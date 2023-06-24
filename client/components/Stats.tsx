@@ -34,6 +34,17 @@ const Stats = ({ data, loading }) => {
               </p>
             </div>
           ))}
+          <h2 className="text-xl text-center font-medium mt-3 ">Location</h2>
+          {Object.keys(data.location).map((item) => (
+            <div key={item}>
+              <p className="text-xl">
+                {item.toUpperCase()}:{' '}
+                <span className="font-bold text-blue-500">
+                  {data.location[item]}
+                </span>
+              </p>
+            </div>
+          ))}
         </div>
       ) : loading ? (
         <h1>Loading..</h1>

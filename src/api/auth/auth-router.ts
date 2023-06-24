@@ -40,4 +40,14 @@ app.get(
   }
 );
 
+app.get('/microsoft', passport.authenticate('microsoft'));
+
+app.get(
+  '/microsoft/callback',
+  passport.authenticate('microsoft', { failureRedirect: config.CLIENT_URL }),
+  function (req, res) {
+    res.redirect(`${config.CLIENT_URL}?source=microsoft`);
+  }
+);
+
 export default app;

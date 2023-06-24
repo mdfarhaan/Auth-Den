@@ -24,12 +24,16 @@ const Home = () => {
 
   const handleUsers = async () => {
     const response = await getUsers();
-    setUserData(response.data.users.data);
+    if (response.success) {
+      setUserData(response.data.users.data);
+    }
   };
 
   const handleStats = async () => {
     const response = await getStats();
-    setStatsData(response.data);
+    if (response.success) {
+      setStatsData(response.data);
+    }
   };
 
   const renderTab = () => {

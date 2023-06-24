@@ -20,6 +20,10 @@ export default {
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_SECRET_KEY,
     },
+    microsoft: {
+      clientID: process.env.MICROSOFT_OAUTH_CLIENT_ID,
+      clientSecret: process.env.MICROSOFT_OAUTH_CLIENT_SECRET,
+    },
   },
   CLIENT_URL: process.env.CLIENT_URL,
 };
