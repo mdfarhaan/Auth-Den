@@ -60,4 +60,14 @@ app.get(
   }
 );
 
+app.get('/spotify', passport.authenticate('spotify'));
+
+app.get(
+  '/spotify/callback',
+  passport.authenticate('spotify', { failureRedirect: config.CLIENT_URL }),
+  function (req, res) {
+    res.redirect(`${config.CLIENT_URL}?source=spotify`);
+  }
+);
+
 export default app;

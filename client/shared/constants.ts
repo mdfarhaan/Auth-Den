@@ -7,5 +7,6 @@ export const API = {
     twitter: '/auth/twitter',
     microsoft: '/auth/microsoft',
     discord: '/auth/discord',
+    spotify: '/auth/spotify',
   },
 };

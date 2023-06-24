@@ -64,7 +64,7 @@ const Home = () => {
           </button>
         ))}
       </div>
-      <div className="grid place-content-center mt-5">{renderTab()}</div>
+      <div className="grid place-content-center my-5">{renderTab()}</div>
       {source && (
         <div className="absolute m-5 top-0 left-0">
           <p className="text-lg">

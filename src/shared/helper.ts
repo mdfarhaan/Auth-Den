@@ -36,6 +36,15 @@ export const discordFormatter = (profile) => {
   };
 };
 
+export const spotifyFormatter = (profile) => {
+  return {
+    provider: profile.provider,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    picture: profile.photos[0].value,
+  };
+};
+
 export const generateRandomInfo = () => {
   const following = Math.floor(Math.random() * 500);
   const followers = Math.floor(Math.random() * 500);

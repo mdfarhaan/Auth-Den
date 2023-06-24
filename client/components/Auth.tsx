@@ -9,6 +9,7 @@ const Auth = () => {
       <Button title={'Github'} link={API.auth.github} />
       <Button title={'Microsoft'} link={API.auth.microsoft} />
       <Button title={'Discord'} link={API.auth.discord} />
+      <Button title={'Spotify'} link={API.auth.spotify} />
       <Button title={'Twitter'} link={API.auth.twitter} />
     </div>
   );

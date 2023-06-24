@@ -4,6 +4,7 @@ import { Strategy as GithubStrategy } from 'passport-github';
 import { Strategy as TwitterStrategy } from 'passport-twitter';
 import { Strategy as MicrosoftStrategy } from 'passport-microsoft';
 import { Strategy as DiscordStrategy } from 'passport-discord';
+import { Strategy as SpotifyStrategy } from 'passport-spotify';
 import config from '../../config';
 import { handleCreateUser } from '../users/users-service';
 import {
@@ -11,6 +12,7 @@ import {
   githubFormatter,
   microsoftFormatter,
   discordFormatter,
+  spotifyFormatter,
 } from '../../shared/helper';
 
 passport.use(
@@ -108,6 +110,27 @@ passport.use(
     async (accessToken, refreshToken, _, profile, cb) => {
       try {
         profile = discordFormatter(profile);
+        await handleCreateUser(profile);
+        return cb(null, profile);
+      } catch (e: any) {
+        console.log('Error in passport.use', e.message);
+        return cb(e, null);
+      }
+    }
+  )
+);
+
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: config.auth.spotify.clientID,
+      clientSecret: config.auth.spotify.clientSecret,
+      callbackURL: `${config.api.url}/api/auth/spotify/callback`,
+      scope: ['user-read-email', 'user-read-private'],
+    },
+    async (accessToken, refreshToken, _, profile, cb) => {
+      try {
+        profile = spotifyFormatter(profile);
         await handleCreateUser(profile);
         return cb(null, profile);
       } catch (e: any) {
