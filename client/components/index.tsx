@@ -20,7 +20,7 @@ const Home = () => {
     handleUsers();
     handleStats();
     setLoading(false);
-  }, []);
+  }, [source]);
 
   const handleUsers = async () => {
     const response = await getUsers();
