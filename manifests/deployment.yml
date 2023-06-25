@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'authdenapi'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 'authdenapi'
+  template:
+    metadata:
+      labels:
+        app: 'authdenapi'
+    spec:
+      containers:
+        - name: 'authdenapi'
+          image: 'authden.azurecr.io/authdenapi'
+          ports:
+            - containerPort: 8000
