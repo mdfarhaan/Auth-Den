@@ -1,0 +1,66 @@
+name: deploy-to-azure
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY_NAME: authden
+  APP_NAME: authdenapi
+  CLUSTER_NAME: authdenaks
+  RESOURCE_GROUP: auth-den
+  NAMESPACE: authden
+  SECRET_NAME: authdenauth
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{env.REGISTRY_NAME}}.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build and push image to ACR
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          build-args: |
+            version=${{ steps.tag.outputs.tag }}
+          tags: ${{env.REGISTRY_NAME}}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: ${{env.CLUSTER_NAME}}
+          resource-group: ${{env.RESOURCE_GROUP}}
+
+      - name: Create namespace
+        run: |
+          namespacePresent=`kubectl get namespace | grep ${{env.NAMESPACE}} | wc -l`
+          if [ $namespacePresent -eq 0 ]
+          then
+              echo `kubectl create namespace ${{env.NAMESPACE}}`
+          fi
+
+      - uses: azure/k8s-create-secret@v1
+        with:
+          namespace: ${{env.NAMESPACE}}
+          container-registry-url: ${{env.REGISTRY_NAME}}.azurecr.io
+          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          secret-name: ${{env.SECRET_NAME}}
+
+      - uses: azure/k8s-deploy@v1.2
+        with:
+          namespace: ${{env.NAMESPACE}}
+          manifests: |
+            manifests/deployment.yml
+            manifests/service.yml
+          images: |
+            ${{env.REGISTRY_NAME}}.azurecr.io/${{env.APP_NAME}}:${{ github.sha }}
+          imagepullsecrets: |
+            ${{env.SECRET_NAME}}
